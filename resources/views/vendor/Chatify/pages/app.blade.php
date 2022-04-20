@@ -5,7 +5,7 @@
         {{-- Header and search bar --}}
         <div class="m-header">
             <nav>
-                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MESSAGES</span> </a>
+                <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">MENSAJES</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#"><i class="fas fa-cog settings-btn"></i></a>
@@ -17,9 +17,9 @@
             {{-- Tabs --}}
             <div class="messenger-listView-tabs">
                 <a href="#" @if($type == 'user') class="active-tab" @endif data-view="users">
-                    <span class="far fa-user"></span> People</a>
-                <a href="#" @if($type == 'group') class="active-tab" @endif data-view="groups">
-                    <span class="fas fa-users"></span> Groups</a>
+                    <span class="far fa-user"></span>Contactos</a>
+                {{-- <a href="#" @if($type == 'group') class="active-tab" @endif data-view="groups">
+                    <span class="fas fa-users"></span> Grupos</a> --}}
             </div>
         </div>
         {{-- tabs and lists --}}
@@ -30,7 +30,7 @@
 
                {{-- Favorites --}}
                <div class="favorites-section">
-                <p class="messenger-title">Favorites</p>
+                <p class="messenger-title">Favoritos</p>
                 <div class="messenger-favorites app-scroll-thin"></div>
                </div>
 
@@ -43,12 +43,12 @@
            </div>
 
            {{-- ---------------- [ Group Tab ] ---------------- --}}
-           <div class="@if($type == 'group') show @endif messenger-tab groups-tab app-scroll" data-view="groups">
-                {{-- items --}}
+           {{-- <div class="@if($type == 'group') show @endif messenger-tab groups-tab app-scroll" data-view="groups">
+                
                 <p style="text-align: center;color:grey;margin-top:30px">
                     <a target="_blank" style="color:{{$messengerColor}};" href="https://chatify.munafio.com/notes#groups-feature">Click here</a> for more info!
                 </p>
-             </div>
+            </div> --}}
 
              {{-- ---------------- [ Search Tab ] ---------------- --}}
            <div class="messenger-tab search-tab app-scroll"app-scroll" data-view="search">
@@ -78,19 +78,32 @@
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
                     <a href="/"><i class="fas fa-home"></i></a>
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a :href="route('logout')"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                            <i class="fa fa-times-circle" aria-hidden="true">
+                            
+                            </i>
+                            </a>
+                            
+                        </form>
+                    </a>
                 </nav>
             </nav>
         </div>
         {{-- Internet connection --}}
         <div class="internet-connection">
-            <span class="ic-connected">Connected</span>
-            <span class="ic-connecting">Connecting...</span>
-            <span class="ic-noInternet">No internet access</span>
+            <span class="ic-connected">Conectado</span>
+            <span class="ic-connecting">Conectando...</span>
+            <span class="ic-noInternet">Sin acceso a la red</span>
         </div>
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el"><span>Por favor selecciona un chat para empezar a mensajear</span></p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">
@@ -109,8 +122,9 @@
         </div>
     </div>
     {{-- ---------------------- Info side ---------------------- --}}
+    {{-- nav actions --}}
     <div class="messenger-infoView app-scroll">
-        {{-- nav actions --}}
+ 
         <nav>
             <a href="#"><i class="fas fa-times"></i></a>
         </nav>
