@@ -136,7 +136,7 @@ class MessagesController extends Controller
 
             $file = $request->file('file');
             // check file size
-            if ($file->getSize() < Chatify::getMaxUploadSize()) {
+            // if ($file->getSize() < Chatify::getMaxUploadSize()) {
                 if (in_array($file->getClientOriginalExtension(), $allowed)) {
                     // get attachment name
                     $attachment_title = $file->getClientOriginalName();
@@ -147,10 +147,10 @@ class MessagesController extends Controller
                     $error->status = 1;
                     $error->message = "File extension not allowed!";
                 }
-            } else {
-                $error->status = 1;
-                $error->message = "File size you are trying to upload is too large!";
-            }
+            // } else {
+            //     $error->status = 1;
+            //     $error->message = "File size you are trying to upload is too large!";
+            // }
         }
 
         if (!$error->status) {
