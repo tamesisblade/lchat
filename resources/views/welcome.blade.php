@@ -46,19 +46,62 @@
           </button>
         </div>
         <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
-            @if (Route::has('login'))
-                <ul class="list-reset lg:flex justify-end flex-1 items-center">
+            @auth
+          
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a :href="route('logout')"
+                        onclick="event.preventDefault();
+                         this.closest('form').submit();"
+                         style="color:white;cursor: pointer;" class="inline-block py-2 px-4 text-black font-bold no-underline" 
+                        >
+                        <i class="fa fa-times-circle" aria-hidden="true">
+                        Cerrar session
+                        </i>
+                        </a>
+                        
+                    </form>
+              
+                </li>
+                
+              
+            </ul>
+            {{-- <li>
+                <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>
+                    
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a :href="route('logout')"
+                    onclick="event.preventDefault();
+                                this.closest('form').submit();">
+                    <i class="fa fa-times-circle" aria-hidden="true">
+                    
+                    </i>
+                    </a>
+                    
+                </form>
+            </a>
+            </li> --}}
+              
+            @endauth
+
+            @guest
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                <a href="{{ route('login') }}" style="color:white;" class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Login</a>
+                </li>
+                @if (Route::has('register'))
                     <li class="mr-3">
-                    <a href="{{ route('login') }}" style="color:white;" class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Login</a>
+                    <a href="{{ route('register') }}" style="color:white;" class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Registrase</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="mr-3">
-                        <a href="{{ route('register') }}" style="color:white;" class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="#">Registrase</a>
-                        </li>
-                    @endif
-                  
-                </ul>
-            @endif
+                @endif
+              
+            </ul>
+            @endguest
+            
+           
         
         </div>
       </div>
